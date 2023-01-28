@@ -1,0 +1,10 @@
+spring:
+ datasource:
+  password: sar_dogs
+  username: sar_dogs
+  url: jdbc:mysql://localhost:3306/sar_dogs
+
+logging:
+ level:
+  root: warn
+  '[com.promineotech]': debug
