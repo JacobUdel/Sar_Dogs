@@ -174,11 +174,12 @@ public class BasicHandlerDao implements HandlerDao {
 	public Handler updateHandlerPhone(Long idHandlers, String mobilePhone) {
 		SqlParams params = generateInsertSql(idHandlers, mobilePhone);
 		
-		KeyHolder keyHolder = new GeneratedKeyHolder();
+		// KeyHolder keyHolder = new GeneratedKeyHolder();
 		
-		jdbcTemplate.update(params.sql, params.source, keyHolder);
+		// jdbcTemplate.update(params.sql, params.source, keyHolder);
+		jdbcTemplate.update(params.sql, params.source);
 		
-		Long handlerPK = keyHolder.getKey().longValue();
+		// Long handlerPK = keyHolder.getKey().longValue();
 
 		// @formatter:off
 		return Handler.builder()
@@ -194,7 +195,7 @@ public class BasicHandlerDao implements HandlerDao {
 		String phone = "MobilePhone";
 		String sql = ""
 				+ "UPDATE Handlers "
-				+ "SET '" + phone + "' = :MobilePhone "
+				+ "SET " + phone + " = :MobilePhone "
 				+ "WHERE idHandlers = :idHandlers";
 
 		log.debug("Update SQL={}", sql);
@@ -204,7 +205,6 @@ public class BasicHandlerDao implements HandlerDao {
 		params.sql = sql;
 		params.source.addValue("idHandlers", idHandlers);
 		params.source.addValue("MobilePhone", mobilePhone);
-
 		
 		return params;
 		
@@ -214,11 +214,12 @@ public class BasicHandlerDao implements HandlerDao {
 	public Handler deleteHandler(Long idHandlers) {
 		SqlParams params = generateInsertSql(idHandlers);
 		
-		KeyHolder keyHolder = new GeneratedKeyHolder();
+		// KeyHolder keyHolder = new GeneratedKeyHolder();
 		
-		jdbcTemplate.update(params.sql, params.source, keyHolder);
+		// jdbcTemplate.update(params.sql, params.source, keyHolder);
+		jdbcTemplate.update(params.sql, params.source);
 		
-		Long handlerPK = keyHolder.getKey().longValue();
+		// Long handlerPK = keyHolder.getKey().longValue();
 
 		// @formatter:off
 		return Handler.builder()
