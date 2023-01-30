@@ -8,4 +8,6 @@ public interface CertificationService {
 
 	List<Certification> readCertifications();
 
+	Certification createCertification(String agency, String certification);
+
 }

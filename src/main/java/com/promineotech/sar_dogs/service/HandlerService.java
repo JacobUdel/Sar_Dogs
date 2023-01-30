@@ -11,7 +11,11 @@ public interface HandlerService {
 	List<Handler> readHandlers();
 
 	Handler createHandler(String lastName, String firstName, String homeStreet, String homeStreet2, String homeCity,
-			String homeState, int homeZip, String mailingStreet, String mailingStreet2, String mailingCity,
-			String mailingState, int mailingZip, String mobilePhone, String email);
+			String homeState, Long homeZip, String mailingStreet, String mailingStreet2, String mailingCity,
+			String mailingState, Long mailingZip, String mobilePhone, String email);
+
+	Handler updateHandlerPhone(Long idHandlers, String mobilePhone);
+
+	Handler deleteHandler(Long idHandlers);
 
 }

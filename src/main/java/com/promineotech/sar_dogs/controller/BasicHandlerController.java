@@ -35,11 +35,23 @@ public class BasicHandlerController implements HandlerController {
 
 	@Override
 	public Handler createHandler(String LastName, String FirstName, String HomeStreet, String HomeStreet2,
-			String HomeCity, String HomeState, int HomeZip, String MailingStreet, String MailingStreet2,
-			String MailingCity, String MailingState, int MailingZip, String MobilePhone, String Email) {
+			String HomeCity, String HomeState, Long HomeZip, String MailingStreet, String MailingStreet2,
+			String MailingCity, String MailingState, Long MailingZip, String MobilePhone, String Email) {
 
 		return handlerService.createHandler(LastName, FirstName, HomeStreet, HomeStreet2, HomeCity, HomeState, 
 				HomeZip, MailingStreet, MailingStreet2, MailingCity, MailingState, MailingZip, MobilePhone, Email);
+	}
+
+	@Override
+	public Handler updateHandlerPhone(Long idHandlers, String mobilePhone) {
+
+		return handlerService.updateHandlerPhone(idHandlers, mobilePhone);
+	}
+
+	@Override
+	public Handler deleteHandler(Long idHandlers) {
+		// TODO Auto-generated method stub
+		return handlerService.deleteHandler(idHandlers);
 	}
 
 

@@ -1,10 +1,13 @@
 package com.promineotech.sar_dogs.controller;
 
+import java.sql.Date;
+//import java.util.Date;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -94,6 +97,49 @@ public interface CanineController {
 	@GetMapping("/readCanines")
 	@ResponseStatus(code = HttpStatus.OK)
 	List<Canine> readCanines();
+	
+	
+	// @formatter:off
+	@Operation(
+			summary = "Create a new Canine",
+			description = "Returns the created Canine",
+			responses = {
+					@ApiResponse(
+							responseCode = "201", 
+							description = "The created Canine is returned", 
+							content = @Content(
+									mediaType = "application/json", 
+									schema = @Schema(implementation = Canine.class))),
+					@ApiResponse(
+							responseCode = "400", 
+							description = "The request parameters are invalid", 
+							content = @Content(
+									mediaType = "application/json")),
+					@ApiResponse(
+							responseCode = "404", 
+							description = "A Canine component was not found with the input critera", 
+							content = @Content(
+									mediaType = "application/json")),
+					@ApiResponse(
+							responseCode = "500", 
+							description = "An unplanned error occured", 
+							content = @Content(
+									mediaType = "application/json"))
+			},
+			parameters = {
+					@Parameter(name = "Name", required = true, description = "The Name is a String"),
+					@Parameter(name = "Breed", required = true, description = "The Breed is a String"),
+					@Parameter(name = "Sex", required = true, description = "The Sex is an int"),
+					@Parameter(name = "Birthdate", required = true, description = "The Birthdate is a DATE"),
+					@Parameter(name = "Handlers_idHandlers", required = true, description = "The Handlers_idHandlers is a Long")
+
+			}
+		)
+	
+	@PostMapping("/createCanine")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	Canine createCanine(String Name, String Breed, int Sex, Date Birthdate, Long Handlers_idHandlers);
+	// @formatter:on
 	
 	
 }

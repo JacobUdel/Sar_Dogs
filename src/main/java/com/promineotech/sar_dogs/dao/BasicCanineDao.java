@@ -1,14 +1,19 @@
 package com.promineotech.sar_dogs.dao;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+// import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import com.promineotech.sar_dogs.entity.Canine;
@@ -81,4 +86,56 @@ public class BasicCanineDao implements CanineDao {
 				// formatter:on
 			}});
 	}
+	@Override
+	public Canine createCanine(String name, String breed, int sex, Date birthdate, Long handlers_idHandlers) {
+		
+		SqlParams params = generateInsertSql(name, breed, sex, birthdate, handlers_idHandlers);
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+		jdbcTemplate.update(params.sql, params.source, keyHolder);
+		
+		Long caninePK = keyHolder.getKey().longValue();
+
+		// @formatter:off
+		return Canine.builder()
+				.idCanines(caninePK)
+				.Name(name)
+				.Breed(breed)
+				.Sex(sex)
+				.Birthdate(birthdate)
+				.Handlers_idHandlers(handlers_idHandlers)
+				.build();
+		// @formatter:on
+
+	}
+	private SqlParams generateInsertSql(String name, String breed, int sex, Date birthdate,
+			Long handlers_idHandlers) {
+
+		// @formatter:off
+		String sql = ""
+				+ "INSERT INTO Canines ("
+				+ "Name, Breed, Sex, Birthdate, Handlers_idHandlers"
+				+ ") VALUES ("
+				+ ":Name, :Breed, :Sex, :Birthdate, :Handlers_idHandlers"
+				+ ")";
+		// @formatter:on
+		SqlParams params = new SqlParams();
+		params.sql = sql;
+		params.source.addValue("Name", name);
+		params.source.addValue("Breed", breed);
+		params.source.addValue("Sex", sex);
+		params.source.addValue("Birthdate", birthdate);
+		params.source.addValue("Handlers_idHandlers", handlers_idHandlers);
+
+		
+		return params;
+		
+		
+	}
+
+}
+class SqlParams {
+	  String sql;
+	  MapSqlParameterSource source = new MapSqlParameterSource();
 }

@@ -21,4 +21,10 @@ public class BasicCertificationController implements CertificationController {
 		return certificationService.readCertifications();
 	}
 
+	@Override
+	public Certification createCertification(String Agency, String Certification) {
+		// TODO Auto-generated method stub
+		return certificationService.createCertification(Agency, Certification);
+	}
+
 }

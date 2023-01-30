@@ -22,4 +22,10 @@ public class BasicCertificationService implements CertificationService {
 		return certificationDao.readCertifications();
 	}
 
+	@Override
+	public Certification createCertification(String agency, String certification) {
+
+		return certificationDao.createCertification(agency, certification);
+	}
+
 }

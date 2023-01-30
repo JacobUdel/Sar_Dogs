@@ -8,4 +8,6 @@ public interface CertificationDao {
 
 	List<Certification> readCertifications();
 
+	Certification createCertification(String agency, String certification);
+
 }

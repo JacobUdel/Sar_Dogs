@@ -30,11 +30,23 @@ public class BasicHandlerService implements HandlerService {
 
 	@Override
 	public Handler createHandler(String lastName, String firstName, String homeStreet, String homeStreet2,
-			String homeCity, String homeState, int homeZip, String mailingStreet, String mailingStreet2,
-			String mailingCity, String mailingState, int mailingZip, String mobilePhone, String email) {
+			String homeCity, String homeState, Long homeZip, String mailingStreet, String mailingStreet2,
+			String mailingCity, String mailingState, Long mailingZip, String mobilePhone, String email) {
 		// TODO Auto-generated method stub
 		return handlerDao.createHandler(lastName, firstName, homeStreet, homeStreet2, homeCity, homeState, homeZip, mailingStreet,
 				mailingStreet2, mailingCity, mailingState, mailingZip, mobilePhone, email);
+	}
+
+	@Override
+	public Handler updateHandlerPhone(Long idHandlers, String mobilePhone) {
+
+		return handlerDao.updateHandlerPhone(idHandlers, mobilePhone);
+	}
+
+	@Override
+	public Handler deleteHandler(Long idHandlers) {
+
+		return handlerDao.deleteHandler(idHandlers);
 	}
 
 }

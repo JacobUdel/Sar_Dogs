@@ -9,8 +9,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+
 
 import com.promineotech.sar_dogs.entity.Handler;
 
@@ -100,10 +104,149 @@ public class BasicHandlerDao implements HandlerDao {
 	}
 	@Override
 	public Handler createHandler(String lastName, String firstName, String homeStreet, String homeStreet2,
-			String homeCity, String homeState, int homeZip, String mailingStreet, String mailingStreet2,
-			String mailingCity, String mailingState, int mailingZip, String mobilePhone, String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+			String homeCity, String homeState, Long homeZip, String mailingStreet, String mailingStreet2,
+			String mailingCity, String mailingState, Long mailingZip, String mobilePhone, String email) {
+		
+		SqlParams params = generateInsertSql(lastName, firstName, homeStreet, homeStreet2, homeCity, homeState, homeZip,
+				mailingStreet, mailingStreet2, mailingCity, mailingState, mailingZip, mobilePhone, email);
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+		jdbcTemplate.update(params.sql, params.source, keyHolder);
+		
+		Long handlerPK = keyHolder.getKey().longValue();
 
+		// @formatter:off
+		return Handler.builder()
+				.idHandlers(handlerPK)
+				.LastName(lastName)
+				.FirstName(firstName)
+				.HomeStreet(homeStreet)
+				.HomeStreet2(homeStreet2)
+				.HomeCity(homeCity)
+				.HomeState(homeState)
+				.HomeZip(homeZip)
+				.MailingStreet(mailingStreet2)
+				.MailingStreet2(mailingStreet2)
+				.MailingCity(mailingCity)
+				.MailingState(mailingState)
+				.MailingZip(mailingZip)
+				.MobilePhone(mobilePhone)
+				.Email(email)
+				.build();
+		// @formatter:on
+
+	}
+	private SqlParams generateInsertSql(String lastName, String firstName, String homeStreet, String homeStreet2,
+			String homeCity, String homeState, Long homeZip, String mailingStreet, String mailingStreet2,
+			String mailingCity, String mailingState, Long mailingZip, String mobilePhone, String email) {
+
+		// @formatter:off
+		String sql = ""
+				+ "INSERT INTO Handlers ("
+				+ "LastName, FirstName, HomeStreet, HomeStreet2, HomeCity, HomeState, HomeZip, MailingStreet, MailingStreet2, MailingCity, MailingState, MailingZip, MobilePhone, Email"
+				+ ") VALUES ("
+				+ ":LastName, :FirstName, :HomeStreet, :HomeStreet2, :HomeCity, :HomeState, :HomeZip, :MailingStreet, :MailingStreet2, :MailingCity, :MailingState, :MailingZip, :MobilePhone, :Email"
+				+ ")";
+		// @formatter:on
+		SqlParams params = new SqlParams();
+		params.sql = sql;
+		params.source.addValue("LastName", lastName);
+		params.source.addValue("FirstName", firstName);
+		params.source.addValue("HomeStreet", homeStreet);
+		params.source.addValue("HomeStreet2", homeStreet2);
+		params.source.addValue("HomeCity", homeCity);
+		params.source.addValue("HomeState", homeState);
+		params.source.addValue("HomeZip", homeZip);
+		params.source.addValue("MailingStreet", mailingStreet);
+		params.source.addValue("MailingStreet2", mailingStreet2);
+		params.source.addValue("MailingCity", mailingCity);
+		params.source.addValue("MailingState", mailingState);
+		params.source.addValue("MailingZip", mailingZip);
+		params.source.addValue("MobilePhone", mobilePhone);
+		params.source.addValue("Email", email);
+		
+		return params;
+		
+		
+	}
+	@Override
+	public Handler updateHandlerPhone(Long idHandlers, String mobilePhone) {
+		SqlParams params = generateInsertSql(idHandlers, mobilePhone);
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+		jdbcTemplate.update(params.sql, params.source, keyHolder);
+		
+		Long handlerPK = keyHolder.getKey().longValue();
+
+		// @formatter:off
+		return Handler.builder()
+				.idHandlers(idHandlers)
+				.MobilePhone(mobilePhone)
+				.build();
+		// @formatter:on
+
+	}
+	private SqlParams generateInsertSql(Long idHandlers, String mobilePhone) {
+
+		// @formatter:off
+		String phone = "MobilePhone";
+		String sql = ""
+				+ "UPDATE Handlers "
+				+ "SET '" + phone + "' = :MobilePhone "
+				+ "WHERE idHandlers = :idHandlers";
+
+		log.debug("Update SQL={}", sql);
+		
+		// @formatter:on
+		SqlParams params = new SqlParams();
+		params.sql = sql;
+		params.source.addValue("idHandlers", idHandlers);
+		params.source.addValue("MobilePhone", mobilePhone);
+
+		
+		return params;
+		
+		
+	}
+	@Override
+	public Handler deleteHandler(Long idHandlers) {
+		SqlParams params = generateInsertSql(idHandlers);
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+		jdbcTemplate.update(params.sql, params.source, keyHolder);
+		
+		Long handlerPK = keyHolder.getKey().longValue();
+
+		// @formatter:off
+		return Handler.builder()
+				.idHandlers(idHandlers)
+				.build();
+		// @formatter:on
+
+	}
+	private SqlParams generateInsertSql(Long idHandlers) {
+
+		// @formatter:off
+		String sql = ""
+				+ "DELETE FROM Handlers "
+				+ "WHERE idHandlers = :idHandlers";
+
+		log.debug("Delete SQL={}", sql);
+		
+		// @formatter:on
+		SqlParams params = new SqlParams();
+		params.sql = sql;
+		params.source.addValue("idHandlers", idHandlers);
+
+
+		
+		return params;
+	}
 }
+// class SqlParams {
+// 	  String sql;
+// 	  MapSqlParameterSource source = new MapSqlParameterSource();
+// }

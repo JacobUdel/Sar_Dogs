@@ -1,5 +1,7 @@
 package com.promineotech.sar_dogs.controller;
 
+import java.sql.Date;
+//import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,12 @@ public class BasicCanineController implements CanineController {
 	@Override
 	public List<Canine> readCanines() {
 		return canineService.readCanines();
+	}
+
+	@Override
+	public Canine createCanine(String Name, String Breed, int Sex, Date Birthdate, Long Handlers_idHandlers) {
+
+		return canineService.createCanine(Name, Breed, Sex, Birthdate, Handlers_idHandlers);
 	}
 
 }
