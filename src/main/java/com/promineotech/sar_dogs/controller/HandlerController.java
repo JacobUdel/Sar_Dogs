@@ -185,7 +185,7 @@ public interface HandlerController {
 			},
 			parameters = {
 					@Parameter(name = "idHandlers", required = true, description = "The idHandlers is an int"),
-					@Parameter(name = "MobilePhone", required = true, description = "The MobilePhone is a String")
+					@Parameter(name = "mobilePhone", required = true, description = "The MobilePhone is a String")
 			}
 		)
 	

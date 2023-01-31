@@ -36,4 +36,10 @@ public class BasicCanineController implements CanineController {
 		return canineService.createCanine(Name, Breed, Sex, Birthdate, Handlers_idHandlers);
 	}
 
+	@Override
+	public Canine deleteCanine(Long idCanines) {
+		
+		return canineService.deleteCanine(idCanines);
+	}
+
 }

@@ -133,7 +133,35 @@ public class BasicCanineDao implements CanineDao {
 		
 		
 	}
+	@Override
+	public Canine deleteCanine(Long idCanines) {
+		SqlParams params = generateInsertSql(idCanines);
+		
+		jdbcTemplate.update(params.sql, params.source);
+		
+		// @formatter:off
+		return Canine.builder()
+				.idCanines(idCanines)
+				.build();
+		// @formatter:on
 
+	}
+	private SqlParams generateInsertSql(Long idCanines) {
+
+		// @formatter:off
+		String sql = ""
+				+ "DELETE FROM Canines "
+				+ "WHERE idCanines = :idCanines";
+
+		log.debug("Delete SQL={}", sql);
+		
+		// @formatter:on
+		SqlParams params = new SqlParams();
+		params.sql = sql;
+		params.source.addValue("idCanines", idCanines);
+		
+		return params;
+	}
 }
 class SqlParams {
 	  String sql;

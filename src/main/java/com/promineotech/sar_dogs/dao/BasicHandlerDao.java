@@ -214,13 +214,8 @@ public class BasicHandlerDao implements HandlerDao {
 	public Handler deleteHandler(Long idHandlers) {
 		SqlParams params = generateInsertSql(idHandlers);
 		
-		// KeyHolder keyHolder = new GeneratedKeyHolder();
-		
-		// jdbcTemplate.update(params.sql, params.source, keyHolder);
 		jdbcTemplate.update(params.sql, params.source);
 		
-		// Long handlerPK = keyHolder.getKey().longValue();
-
 		// @formatter:off
 		return Handler.builder()
 				.idHandlers(idHandlers)

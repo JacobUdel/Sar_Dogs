@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -141,5 +142,41 @@ public interface CanineController {
 	Canine createCanine(String Name, String Breed, int Sex, Date Birthdate, Long Handlers_idHandlers);
 	// @formatter:on
 	
+	// @formatter:off
+	@Operation(
+			summary = "Delete a Canine",
+			description = "Returns the a 200 status code",
+			responses = {
+					@ApiResponse(
+							responseCode = "200", 
+							description = "The Canine is deleted", 
+							content = @Content(
+									mediaType = "application/json", 
+									schema = @Schema(implementation = Canine.class))),
+					@ApiResponse(
+							responseCode = "400", 
+							description = "The request parameters are invalid", 
+							content = @Content(
+									mediaType = "application/json")),
+					@ApiResponse(
+							responseCode = "404", 
+							description = "A Canine component was not found with the input critera", 
+							content = @Content(
+									mediaType = "application/json")),
+					@ApiResponse(
+							responseCode = "500", 
+							description = "An unplanned error occured", 
+							content = @Content(
+									mediaType = "application/json"))
+			},
+			parameters = {
+					@Parameter(name = "idCanines", required = true, description = "The idCanines is an int")
+			}
+		)
+	
+	@DeleteMapping("/deleteCanine")
+	@ResponseStatus(code = HttpStatus.OK)
+	Canine deleteCanine(Long idCanines);
+	// @formatter:on
 	
 }

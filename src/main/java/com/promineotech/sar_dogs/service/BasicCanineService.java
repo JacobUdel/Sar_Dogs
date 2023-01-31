@@ -37,4 +37,10 @@ public class BasicCanineService implements CanineService {
 		return canineDao.createCanine(name, breed, sex, birthdate, handlers_idHandlers);
 	}
 
+	@Override
+	public Canine deleteCanine(Long idCanines) {
+		
+		return canineDao.deleteCanine(idCanines);
+	}
+
 }

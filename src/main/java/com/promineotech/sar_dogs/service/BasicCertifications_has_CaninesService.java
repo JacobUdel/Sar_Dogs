@@ -22,4 +22,11 @@ public class BasicCertifications_has_CaninesService implements Certifications_ha
 		return certifications_has_CaninesDao.readCertifications_has_Canines();
 	}
 
+	@Override
+	public Certifications_has_Canines createCanineCertification(Long certifications_idCertifications,
+			Long canines_idCanines) {
+		
+		return certifications_has_CaninesDao.createCanineCertification(certifications_idCertifications, canines_idCanines);
+	}
+
 }

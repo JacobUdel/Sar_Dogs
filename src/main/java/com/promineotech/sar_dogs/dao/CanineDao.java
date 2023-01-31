@@ -14,4 +14,6 @@ public interface CanineDao {
 
 	Canine createCanine(String name, String breed, int sex, Date birthdate, Long handlers_idHandlers);
 
+	Canine deleteCanine(Long idCanines);
+
 }

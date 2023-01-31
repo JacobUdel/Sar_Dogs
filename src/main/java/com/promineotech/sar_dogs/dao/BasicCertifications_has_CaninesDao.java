@@ -9,10 +9,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import com.promineotech.sar_dogs.entity.Certification;
 import com.promineotech.sar_dogs.entity.Certifications_has_Canines;
+import com.promineotech.sar_dogs.entity.Handler;
 
 import lombok.extern.slf4j.Slf4j;
 @Component
@@ -46,5 +49,44 @@ public class BasicCertifications_has_CaninesDao implements Certifications_has_Ca
 				// formatter:on
 			}});
 	}
+	@Override
+	public Certifications_has_Canines createCanineCertification(Long certifications_idCertifications,
+			Long canines_idCanines) {
 
+		SqlParams params = generateInsertSql(certifications_idCertifications, canines_idCanines);
+		
+		// KeyHolder keyHolder = new GeneratedKeyHolder();
+		
+		jdbcTemplate.update(params.sql, params.source);
+//		jdbcTemplate.update(params.sql, params.source, keyHolder);
+		
+		// Long handlerPK = keyHolder.getKey().longValue();
+
+		// @formatter:off
+		return Certifications_has_Canines.builder()
+				.Certifications_idCertifications(certifications_idCertifications)
+				.Canines_idCanines(canines_idCanines)
+				.build();
+		// @formatter:on
+
+	}
+	private SqlParams generateInsertSql(Long certifications_idCertifications, Long canines_idCanines) {
+
+		// @formatter:off
+		String sql = ""
+				+ "INSERT INTO Certifications_has_Canines ("
+				+ "Certifications_idCertifications, Canines_idCanines) VALUES ("
+				+ ":Certifications_idCertifications, :Canines_idCanines"
+				+ ")";
+		// @formatter:on
+		SqlParams params = new SqlParams();
+		params.sql = sql;
+		params.source.addValue("Certifications_idCertifications", certifications_idCertifications);
+		params.source.addValue("Canines_idCanines", canines_idCanines);
+
+		
+		return params;
+		
+		
+	}
 }

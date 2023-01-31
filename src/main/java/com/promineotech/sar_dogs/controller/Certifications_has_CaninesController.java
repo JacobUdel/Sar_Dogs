@@ -5,14 +5,17 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.promineotech.sar_dogs.entity.Certification;
 import com.promineotech.sar_dogs.entity.Certifications_has_Canines;
+import com.promineotech.sar_dogs.entity.Handler;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -56,4 +59,47 @@ public interface Certifications_has_CaninesController {
 	@GetMapping("/readCertifications_has_Canines")
 	@ResponseStatus(code = HttpStatus.OK)
 	List<Certifications_has_Canines> readCertificationss_has_Canines();
+	
+	// @formatter:off
+	@Operation(
+			summary = "Award a Canine a Certificate",
+			description = "Returns the created Cert-Has_Canines",
+			responses = {
+					@ApiResponse(
+							responseCode = "201", 
+							description = "The created Handler is returned", 
+							content = @Content(
+									mediaType = "application/json", 
+									schema = @Schema(implementation = Certifications_has_Canines.class))),
+					@ApiResponse(
+							responseCode = "400", 
+							description = "The request parameters are invalid", 
+							content = @Content(
+									mediaType = "application/json")),
+					@ApiResponse(
+							responseCode = "404", 
+							description = "A Certifications_has_Canines component was not found with the input critera", 
+							content = @Content(
+									mediaType = "application/json")),
+					@ApiResponse(
+							responseCode = "500", 
+							description = "An unplanned error occured", 
+							content = @Content(
+									mediaType = "application/json"))
+			},
+			parameters = {
+					@Parameter(name = "Certifications_idCertifications", required = true, description = "The Certifications_idCertifications is an int"),
+					@Parameter(name = "Canines_idCanines", required = true, description = "The Canines_idCanines is an int")
+
+			}
+		)
+	
+	@PostMapping("/createCanineCertification")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	Certifications_has_Canines createCanineCertification(Long Certifications_idCertifications, Long Canines_idCanines);
+	// @formatter:on
+	
+	
+
+	
 }
