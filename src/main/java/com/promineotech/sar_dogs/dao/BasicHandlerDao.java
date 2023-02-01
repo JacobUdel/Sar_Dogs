@@ -212,8 +212,16 @@ public class BasicHandlerDao implements HandlerDao {
 	}
 	@Override
 	public Handler deleteHandler(Long idHandlers) {
-		SqlParams params = generateInsertSql(idHandlers);
 		
+		// check for idHandlers exists in table Handler and throw an exception if not
+		
+		if (idHandlers.equals(null)) {
+			log.debug("DElete: idHandlers.equals(null) is true");
+			return null;
+		}
+		
+		
+		SqlParams params = generateInsertSql(idHandlers);
 		jdbcTemplate.update(params.sql, params.source);
 		
 		// @formatter:off
@@ -237,6 +245,7 @@ public class BasicHandlerDao implements HandlerDao {
 		params.sql = sql;
 		params.source.addValue("idHandlers", idHandlers);
 
+		// another place to check for idHandlers.isNull()
 
 		
 		return params;
