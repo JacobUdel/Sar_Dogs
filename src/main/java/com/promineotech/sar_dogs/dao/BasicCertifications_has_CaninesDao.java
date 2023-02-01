@@ -89,4 +89,39 @@ public class BasicCertifications_has_CaninesDao implements Certifications_has_Ca
 		
 		
 	}
+	@Override
+	public Certifications_has_Canines deleteCanineCertification(Long certifications_idCertifications,
+			Long canines_idCanines) {
+		SqlParams params = generateDeleteSql(certifications_idCertifications, canines_idCanines);
+		
+		jdbcTemplate.update(params.sql, params.source);
+		
+		// @formatter:off
+		return Certifications_has_Canines.builder()
+				.Certifications_idCertifications(certifications_idCertifications)
+				.Canines_idCanines(canines_idCanines)
+				.build();
+		// @formatter:on
+
+	}
+	private SqlParams generateDeleteSql(Long certifications_idCertifications, Long canines_idCanines) {
+
+		// @formatter:off
+		String sql = ""
+				+ "DELETE FROM Certifications_has_Canines "
+				+ "WHERE certifications_idCertifications = :certifications_idCertifications "
+				+ "AND canines_idCanines = :canines_idCanines";
+
+		log.debug("Delete SQL={}", sql);
+		
+		// @formatter:on
+		SqlParams params = new SqlParams();
+		params.sql = sql;
+		params.source.addValue("certifications_idCertifications", certifications_idCertifications);
+		params.source.addValue("canines_idCanines", canines_idCanines);
+
+
+		
+		return params;
+	}
 }

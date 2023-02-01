@@ -10,4 +10,6 @@ public interface Certifications_has_CaninesDao {
 
 	Certifications_has_Canines createCanineCertification(Long certifications_idCertifications, Long canines_idCanines);
 
+	Certifications_has_Canines deleteCanineCertification(Long certifications_idCertifications, Long canines_idCanines);
+
 }
