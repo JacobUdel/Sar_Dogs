@@ -1,0 +1,28 @@
+This is the final project of my work with Promineo Tech on their Back End Certification program. This project models the relationships between Search Dog teams and their various Certifications. A Search Dog team is made up of a Handler and a Canine. A Handler can have many Canines. A Canine can have Many Certifications and a Certification can have Many Canines. 
+Please see the accompanying ERD. Also included are .sql scripts to create and populate a MySql database. The code itself is Java under a Spring application framework. The app creates a RESTful API to the database.
+
+The API arranged by entities (tables) is as follows:
+
+Handlers:
+GET by name
+GET all
+POST new handler
+PUT (update) handler's mobile phone
+DELETE handler (should cascade delete entries in canines and cert_has_canine)
+
+Canines:
+GET all 
+GET by handler 
+POST new canine
+DELETE canine (should cascade delete entries in cert_has_canine)
+
+Certifications:
+GET all
+POST new
+
+Cert_Has_Canine:
+GET all ordered by canine
+POST
+DELETE
+
+While this project is feature complete, there are a number a stretch goals. There are many additional PUT operations that could be performed on the Handler (update address, email, etc.) Several operations could be made more robust. Ultimatly, marrying this project with a geospatial library of some form would allow one to look up Search Dog teams by their proximetery to a given location (i.e. "who's closest to the missing person that can respond the fastest?")
