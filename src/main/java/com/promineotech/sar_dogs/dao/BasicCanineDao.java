@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -137,7 +138,12 @@ public class BasicCanineDao implements CanineDao {
 	public Canine deleteCanine(Long idCanines) {
 		SqlParams params = generateInsertSql(idCanines);
 		
-		jdbcTemplate.update(params.sql, params.source);
+		int test = jdbcTemplate.update(params.sql, params.source);
+		// if we deleted 0 rows, throw a 404 exception.
+		if (test == 0) {
+			log.debug("Time to throw an exception");
+			throw new NoSuchElementException();
+		}
 		
 		// @formatter:off
 		return Canine.builder()

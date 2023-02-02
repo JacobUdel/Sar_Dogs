@@ -1,6 +1,7 @@
 package com.promineotech.sar_dogs.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -49,8 +50,8 @@ public class BasicHandlerController implements HandlerController {
 	}
 
 	@Override
-	public Handler deleteHandler(Long idHandlers) {
-		// TODO Auto-generated method stub
+	public Optional<Handler> deleteHandler(Long idHandlers) {
+
 		return handlerService.deleteHandler(idHandlers);
 	}
 

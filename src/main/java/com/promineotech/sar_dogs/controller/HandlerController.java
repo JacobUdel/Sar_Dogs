@@ -1,6 +1,7 @@
 package com.promineotech.sar_dogs.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -228,6 +229,6 @@ public interface HandlerController {
 	
 	@DeleteMapping("/deleteHandler")
 	@ResponseStatus(code = HttpStatus.OK)
-	Handler deleteHandler(Long idHandlers);
+	Optional<Handler> deleteHandler(Long idHandlers);
 	// @formatter:on
 }

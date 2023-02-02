@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -211,23 +213,23 @@ public class BasicHandlerDao implements HandlerDao {
 		
 	}
 	@Override
-	public Handler deleteHandler(Long idHandlers) {
+	public Optional<Handler> deleteHandler(Long idHandlers) {
 		
-		// check for idHandlers exists in table Handler and throw an exception if not
-		
-		if (idHandlers.equals(null)) {
-			log.debug("DElete: idHandlers.equals(null) is true");
-			return null;
-		}
+
 		
 		
 		SqlParams params = generateInsertSql(idHandlers);
-		jdbcTemplate.update(params.sql, params.source);
 		
+		int test = jdbcTemplate.update(params.sql, params.source);
+		// if we deleted 0 rows, throw a 404 exception.
+		if (test == 0) {
+			log.debug("Time to throw an exception");
+			throw new NoSuchElementException();
+		}
 		// @formatter:off
-		return Handler.builder()
+		return Optional.ofNullable(Handler.builder()
 				.idHandlers(idHandlers)
-				.build();
+				.build());
 		// @formatter:on
 
 	}

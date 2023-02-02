@@ -1,6 +1,7 @@
 package com.promineotech.sar_dogs.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +45,7 @@ public class BasicHandlerService implements HandlerService {
 	}
 
 	@Override
-	public Handler deleteHandler(Long idHandlers) {
+	public Optional<Handler> deleteHandler(Long idHandlers) {
 
 		return handlerDao.deleteHandler(idHandlers);
 	}

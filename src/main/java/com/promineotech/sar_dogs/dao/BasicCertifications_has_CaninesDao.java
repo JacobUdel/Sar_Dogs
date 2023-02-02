@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -94,7 +95,12 @@ public class BasicCertifications_has_CaninesDao implements Certifications_has_Ca
 			Long canines_idCanines) {
 		SqlParams params = generateDeleteSql(certifications_idCertifications, canines_idCanines);
 		
-		jdbcTemplate.update(params.sql, params.source);
+		int test = jdbcTemplate.update(params.sql, params.source);
+		// if we deleted 0 rows, throw a 404 exception.
+		if (test == 0) {
+			log.debug("Time to throw an exception");
+			throw new NoSuchElementException();
+		}
 		
 		// @formatter:off
 		return Certifications_has_Canines.builder()

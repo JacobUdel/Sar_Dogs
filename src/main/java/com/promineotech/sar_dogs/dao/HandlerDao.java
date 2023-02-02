@@ -1,6 +1,7 @@
 package com.promineotech.sar_dogs.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.promineotech.sar_dogs.entity.Handler;
 
@@ -16,6 +17,6 @@ public interface HandlerDao {
 
 	Handler updateHandlerPhone(Long idHandlers, String mobilePhone);
 
-	Handler deleteHandler(Long idHandlers);
+	Optional<Handler> deleteHandler(Long idHandlers);
 
 }
