@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `SAR_DOGS`.`Canines` (
   CONSTRAINT `fk_Canines_Handlers`
     FOREIGN KEY (`Handlers_idHandlers`)
     REFERENCES `SAR_DOGS`.`Handlers` (`idHandlers`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -88,12 +88,12 @@ CREATE TABLE IF NOT EXISTS `SAR_DOGS`.`Certifications_has_Canines` (
   CONSTRAINT `fk_Certifications_has_Canines_Certifications1`
     FOREIGN KEY (`Certifications_idCertifications`)
     REFERENCES `SAR_DOGS`.`Certifications` (`idCertifications`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Certifications_has_Canines_Canines1`
     FOREIGN KEY (`Canines_idCanines`)
     REFERENCES `SAR_DOGS`.`Canines` (`idCanines`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
