@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.promineotech.sar_dogs.entity.Canine;
 import com.promineotech.sar_dogs.entity.Handler;
+import com.promineotech.sar_dogs.entity.Sex;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -130,7 +131,7 @@ public interface CanineController {
 			parameters = {
 					@Parameter(name = "Name", required = true, description = "The Name is a String"),
 					@Parameter(name = "Breed", required = true, description = "The Breed is a String"),
-					@Parameter(name = "Sex", required = true, description = "The Sex is an int"),
+					@Parameter(name = "Sex", required = true, description = "The Sex is an Enum"),
 					@Parameter(name = "Birthdate", required = true, description = "The Birthdate is a DATE"),
 					@Parameter(name = "Handlers_idHandlers", required = true, description = "The Handlers_idHandlers is a Long")
 
@@ -139,7 +140,7 @@ public interface CanineController {
 	
 	@PostMapping("/createCanine")
 	@ResponseStatus(code = HttpStatus.CREATED)
-	Canine createCanine(String Name, String Breed, int Sex, Date Birthdate, Long Handlers_idHandlers);
+	Canine createCanine(String Name, String Breed, Sex Sex, Date Birthdate, Long Handlers_idHandlers);
 	// @formatter:on
 	
 	// @formatter:off

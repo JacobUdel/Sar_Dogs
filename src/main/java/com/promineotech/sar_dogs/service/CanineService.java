@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 
 import com.promineotech.sar_dogs.entity.Canine;
+import com.promineotech.sar_dogs.entity.Sex;
 
 public interface CanineService {
 
@@ -12,7 +13,7 @@ public interface CanineService {
 
 	List<Canine> readCanines();
 
-	Canine createCanine(String name, String breed, int sex, Date birthdate, Long handlers_idHandlers);
+	Canine createCanine(String name, String breed, Sex sex, Date birthdate, Long handlers_idHandlers);
 
 	Canine deleteCanine(Long idCanines);
 

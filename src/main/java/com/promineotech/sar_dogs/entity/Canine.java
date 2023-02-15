@@ -16,7 +16,7 @@ public class Canine {
 	private Long idCanines;
 	private String Name;
 	private String Breed;
-	private int Sex;
+	private Sex Sex;
 	private Date Birthdate;
 	private Long Handlers_idHandlers;
 

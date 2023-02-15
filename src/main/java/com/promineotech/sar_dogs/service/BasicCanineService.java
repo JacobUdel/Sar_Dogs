@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.promineotech.sar_dogs.dao.CanineDao;
 import com.promineotech.sar_dogs.entity.Handler;
+import com.promineotech.sar_dogs.entity.Sex;
 import com.promineotech.sar_dogs.entity.Canine;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,7 @@ public class BasicCanineService implements CanineService {
 	}
 
 	@Override
-	public Canine createCanine(String name, String breed, int sex, Date birthdate, Long handlers_idHandlers) {
+	public Canine createCanine(String name, String breed, Sex sex, Date birthdate, Long handlers_idHandlers) {
 
 		return canineDao.createCanine(name, breed, sex, birthdate, handlers_idHandlers);
 	}

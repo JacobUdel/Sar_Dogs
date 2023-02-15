@@ -12,19 +12,19 @@ INSERT INTO Handlers (LastName, FirstName, HomeStreet, HomeStreet2, HomeCity, Ho
 
 
 
-INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Doc' ,'Lab' , 0, '2011-01-11', 1);
+INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Doc' ,'Lab' , 'Female', '2011-01-11', 1);
 
-INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Grumpy' ,'GSD' , 1, '2012-02-12', 2);
+INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Grumpy' ,'GSD' , 'Male', '2012-02-12', 2);
 
-INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Happy' ,'Aussie' , 0, '2013-03-13', 3);
+INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Happy' ,'Aussie' , 'Female', '2013-03-13', 3);
 
-INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Sleepy' ,'Bourder Collie' , 1, '2014-04-14', 4);
+INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Sleepy' ,'Bourder Collie' , 'Male', '2014-04-14', 4);
 
-INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Bashful' ,'Lab' , 0, '2015-05-15', 4);
+INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Bashful' ,'Lab' , 'Female', '2015-05-15', 4);
 
-INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Sneezy' ,'GSD' , 1, '2016-06-16', 5);
+INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Sneezy' ,'GSD' , 'Male', '2016-06-16', 5);
 
-INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Dopey' ,'Aussie' , 0, '2017-07-17', 5);
+INSERT INTO Canines (Name, Breed, Sex, Birthdate, Handlers_idHandlers) VALUES ('Dopey' ,'Aussie' , 'Female', '2017-07-17', 5);
 
 
 insert into certifications (Agency, Certification) values ('NASAR', 'Trailing Type I');

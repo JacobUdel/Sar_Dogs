@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import com.promineotech.sar_dogs.entity.Canine;
 import com.promineotech.sar_dogs.entity.Handler;
+import com.promineotech.sar_dogs.entity.Sex;
 
 import lombok.extern.slf4j.Slf4j;
 @Component
@@ -52,7 +53,7 @@ public class BasicCanineDao implements CanineDao {
 						.idCanines(rs.getLong("idCanines"))
 						.Name(rs.getString("Name"))
 						.Breed(rs.getString("Breed"))
-						.Sex(rs.getInt("Sex"))
+						.Sex(Sex.valueOf(rs.getString("Sex")))
 						.Birthdate(rs.getDate("Birthdate"))
 						.Handlers_idHandlers(rs.getLong("Handlers_idHandlers"))
 						.build();
@@ -80,7 +81,7 @@ public class BasicCanineDao implements CanineDao {
 						.idCanines(rs.getLong("idCanines"))
 						.Name(rs.getString("Name"))
 						.Breed(rs.getString("Breed"))
-						.Sex(rs.getInt("Sex"))
+						.Sex(Sex.valueOf(rs.getString("Sex")))
 						.Birthdate(rs.getDate("Birthdate"))
 						.Handlers_idHandlers(rs.getLong("Handlers_idHandlers"))
 						.build();
@@ -88,7 +89,7 @@ public class BasicCanineDao implements CanineDao {
 			}});
 	}
 	@Override
-	public Canine createCanine(String name, String breed, int sex, Date birthdate, Long handlers_idHandlers) {
+	public Canine createCanine(String name, String breed, Sex sex, Date birthdate, Long handlers_idHandlers) {
 		
 		SqlParams params = generateInsertSql(name, breed, sex, birthdate, handlers_idHandlers);
 		
@@ -110,7 +111,7 @@ public class BasicCanineDao implements CanineDao {
 		// @formatter:on
 
 	}
-	private SqlParams generateInsertSql(String name, String breed, int sex, Date birthdate,
+	private SqlParams generateInsertSql(String name, String breed, Sex sex, Date birthdate,
 			Long handlers_idHandlers) {
 
 		// @formatter:off
@@ -125,7 +126,7 @@ public class BasicCanineDao implements CanineDao {
 		params.sql = sql;
 		params.source.addValue("Name", name);
 		params.source.addValue("Breed", breed);
-		params.source.addValue("Sex", sex);
+		params.source.addValue("Sex", sex.toString());
 		params.source.addValue("Birthdate", birthdate);
 		params.source.addValue("Handlers_idHandlers", handlers_idHandlers);
 

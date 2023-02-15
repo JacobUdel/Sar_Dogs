@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.promineotech.sar_dogs.entity.Canine;
 import com.promineotech.sar_dogs.entity.Handler;
+import com.promineotech.sar_dogs.entity.Sex;
 import com.promineotech.sar_dogs.service.CanineService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,7 @@ public class BasicCanineController implements CanineController {
 	}
 
 	@Override
-	public Canine createCanine(String Name, String Breed, int Sex, Date Birthdate, Long Handlers_idHandlers) {
+	public Canine createCanine(String Name, String Breed, Sex Sex, Date Birthdate, Long Handlers_idHandlers) {
 
 		return canineService.createCanine(Name, Breed, Sex, Birthdate, Handlers_idHandlers);
 	}
