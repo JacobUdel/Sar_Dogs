@@ -43,6 +43,8 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
+ALTER TABLE handlers
+  add CONSTRAINT person_lname_fname_address UNIQUE (LastName, FirstName, HomeStreet);
 
 -- -----------------------------------------------------
 -- Table `sar_dogs`.`canines`
