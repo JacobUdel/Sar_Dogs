@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.dao.DuplicateKeyException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +25,12 @@ import java.time.ZonedDateTime;
 public class GlobalErrorHandler {
 	private enum LogStatus {
 		STACK_TRACE, MESSAGE_ONLY
+	}
+	
+	@ExceptionHandler(DuplicateKeyException.class)
+	@ResponseStatus(code = HttpStatus.ALREADY_REPORTED)
+	public Map<String, Object> handleDuplicateKeyException(DuplicateKeyException e, WebRequest webRequest) {
+		return createExceptionMessage(e, HttpStatus.ALREADY_REPORTED, webRequest, LogStatus.MESSAGE_ONLY);
 	}
 	
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
